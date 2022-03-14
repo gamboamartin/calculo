@@ -8,16 +8,16 @@ use stdClass;
 use Throwable;
 
 
-class calculo{ //DEBUG INI
+class calculo{
     private array $meses_espaniol;
     public validacion $validaciones;
     public errores $error;
 
     /**
-     * DEBUG INI
+     *
      * calculo constructor.
      */
-    #[Pure] public function __construct(){ //PRUEBAS FINALIZADAS
+    #[Pure] public function __construct(){
         $this->error = new errores();
         $this->validaciones = new validacion();
         $this->meses_espaniol = array('enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre',
@@ -27,7 +27,7 @@ class calculo{ //DEBUG INI
     }
 
     /**
-     * DEBUG INI FIN ERROR DEF Funcion el tiempo actual en microsegundos
+     * Funcion el tiempo actual en microsegundos
      *
      *
      * @example
@@ -42,7 +42,7 @@ class calculo{ //DEBUG INI
     }
 
     /**
-     * PHPUNIT
+     *
      * Funcion para obtener el mes en espaniol
      *
      * @param string $fecha
@@ -69,7 +69,7 @@ class calculo{ //DEBUG INI
     }
 
     /**
-     * PHPUNIT
+     * @version 1.0.0
      * Funcion para obtener el numero de un mes
      *
      * @param string $fecha
@@ -90,7 +90,7 @@ class calculo{ //DEBUG INI
     }
 
     /**
-     * PHPUNIT
+     *
      * @param int $n_dias
      * @param string $fecha
      * @return string|array
@@ -107,7 +107,7 @@ class calculo{ //DEBUG INI
     }
 
     /**
-     * PHPUNIT
+     *
      * @param string $fecha_inicio
      * @param string $fecha_fin
      * @return int|array
@@ -137,6 +137,5 @@ class calculo{ //DEBUG INI
         }
         return (int)$diff->days + 1;
     }
-
 
 }
