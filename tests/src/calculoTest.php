@@ -3,7 +3,8 @@ namespace tests\src;
 
 use gamboamartin\calculo\calculo;
 use gamboamartin\errores\errores;
-use tests\test;
+use gamboamartin\test\test;
+
 
 
 class calculoTest extends test {
@@ -12,6 +13,15 @@ class calculoTest extends test {
     {
         parent::__construct($name, $data, $dataName);
         $this->errores = new errores();
+    }
+
+    public function test_microtime_float(){
+        errores::$error = false;
+        $calculo = new calculo();
+        $resultado = $calculo->microtime_float();
+        $this->assertIsInt( $resultado);
+        $this->assertNotTrue(errores::$error);
+
     }
 
     public function test_obten_mes_espaniol(){

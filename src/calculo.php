@@ -27,6 +27,7 @@ class calculo{
     }
 
     /**
+     * P ORDER P INT
      * Funcion el tiempo actual en microsegundos
      *
      *
@@ -42,7 +43,7 @@ class calculo{
     }
 
     /**
-     *
+     * P ORDER P INT
      * Funcion para obtener el mes en espaniol
      *
      * @param string $fecha
@@ -57,11 +58,11 @@ class calculo{
      * @uses controlador_cliente
      */
     public function obten_mes_espaniol(string $fecha):string|array{
-        $valida_fecha = $this->validaciones->valida_fecha($fecha);
+        $valida_fecha = $this->validaciones->valida_fecha(fecha: $fecha);
         if(errores::$error){
             return $this->error->error('Error al validar fecha', $valida_fecha);
         }
-        $numero_mes = $this->obten_numero_mes($fecha);
+        $numero_mes = $this->obten_numero_mes(fecha: $fecha);
         if(errores::$error){
             return $this->error->error('Error al obtener mes', $numero_mes);
         }
@@ -69,7 +70,7 @@ class calculo{
     }
 
     /**
-     * @version 1.0.0
+     * P ORDER P INT
      * Funcion para obtener el numero de un mes
      *
      * @param string $fecha
@@ -82,11 +83,11 @@ class calculo{
      * @uses calculo
      */
     private function obten_numero_mes(string $fecha):string|array{
-        $valida_fecha = $this->validaciones->valida_fecha($fecha);
+        $valida_fecha = $this->validaciones->valida_fecha(fecha: $fecha);
         if(errores::$error){
             return $this->error->error('Error al validar fecha', $valida_fecha);
         }
-        return intval((date("m", strtotime($fecha))));
+        return (int)(date("m", strtotime($fecha)));
     }
 
     /**

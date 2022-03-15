@@ -6,7 +6,7 @@
     "autoload": {
         "psr-4": {
             "gamboamartin\\calculo\\": "src/",
-            "tests\\": "tests/"
+            "gamboamartin\\test\\": "tests/"
         }
     },
     "authors": [
