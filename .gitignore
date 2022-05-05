@@ -57,6 +57,7 @@ unit_test/prueba.zip
 /.vscode/
 composer.lock
 tests/config.php
+config/database.php
 
 
 /vendor/
