@@ -94,15 +94,17 @@ class calculo{
      *
      * @param int $n_dias
      * @param string $fecha
+     * @param string $tipo_val
      * @return string|array
      */
-    public function obten_fecha_resta(int $n_dias, string $fecha):string|array{
-        $valida = $this->validaciones->valida_fecha($fecha);
+    public function obten_fecha_resta(int $n_dias, string $fecha, string $tipo_val = 'fecha'):string|array{
+        $valida = $this->validaciones->valida_fecha(fecha: $fecha, tipo_val: $tipo_val);
         if(errores::$error){
-            return $this->error->error('Error al validar fecha', $valida);
+            return $this->error->error(mensaje: 'Error al validar fecha',data:  $valida ,params: get_defined_vars());
         }
         if($n_dias<0){
-            return $this->error->error('Error $n_dias debe ser mayor o igual a 0', $n_dias);
+            return $this->error->error(mensaje: 'Error $n_dias debe ser mayor o igual a 0', data: $n_dias,
+                params: get_defined_vars());
         }
         return date("Y-m-d",strtotime($fecha."- $n_dias days"));
     }
