@@ -12,6 +12,7 @@ class calculo{
     private array $meses_espaniol;
     public validacion $validaciones;
     public errores $error;
+    private array $formats_fecha = array();
 
     /**
      *
@@ -23,11 +24,14 @@ class calculo{
         $this->meses_espaniol = array('enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre',
             'octubre','noviembre','diciembre');
 
+        $this->formats_fecha['fecha'] = 'Y-m-d';
+        $this->formats_fecha['fecha_hora_min_sec_esp'] = 'Y-m-d H:i:s';
+        $this->formats_fecha['fecha_hora_min_sec_t'] = 'Y-m-dTH:i:s';
 
     }
 
     /**
-     * P ORDER P INT
+     * FULL
      * Funcion el tiempo actual en microsegundos
      *
      *
@@ -37,13 +41,13 @@ class calculo{
      * @return int tiempo
      * @uses index
      */
-    public function microtime_float():int{ //FIN PROT
+    public function microtime_float():int{
         
         return time();
     }
 
     /**
-     * P ORDER P INT
+     * P ORDER P INT ERROR
      * Funcion para obtener el mes en espaniol
      *
      * @param string $fecha
@@ -60,17 +64,18 @@ class calculo{
     public function obten_mes_espaniol(string $fecha):string|array{
         $valida_fecha = $this->validaciones->valida_fecha(fecha: $fecha);
         if(errores::$error){
-            return $this->error->error('Error al validar fecha', $valida_fecha);
+            return $this->error->error(mensaje: 'Error al validar fecha', data: $valida_fecha,
+                params: get_defined_vars());
         }
         $numero_mes = $this->obten_numero_mes(fecha: $fecha);
         if(errores::$error){
-            return $this->error->error('Error al obtener mes', $numero_mes);
+            return $this->error->error(mensaje: 'Error al obtener mes',data:  $numero_mes, params: get_defined_vars());
         }
         return $this->meses_espaniol[$numero_mes-1];
     }
 
     /**
-     * P ORDER P INT
+     * P ORDER P INT ERROR
      * Funcion para obtener el numero de un mes
      *
      * @param string $fecha
@@ -85,13 +90,14 @@ class calculo{
     private function obten_numero_mes(string $fecha):string|array{
         $valida_fecha = $this->validaciones->valida_fecha(fecha: $fecha);
         if(errores::$error){
-            return $this->error->error('Error al validar fecha', $valida_fecha);
+            return $this->error->error(mensaje: 'Error al validar fecha', data: $valida_fecha,
+                params: get_defined_vars());
         }
         return (int)(date("m", strtotime($fecha)));
     }
 
     /**
-     * P ORDER P INT ERROREV
+     * FULL
      * @param int $n_dias
      * @param string $fecha
      * @param string $tipo_val
@@ -106,7 +112,9 @@ class calculo{
             return $this->error->error(mensaje: 'Error $n_dias debe ser mayor o igual a 0', data: $n_dias,
                 params: get_defined_vars());
         }
-        return date("Y-m-d",strtotime($fecha."- $n_dias days"));
+
+        $format = $this->formats_fecha[$tipo_val];
+        return date($format,strtotime($fecha."- $n_dias days"));
     }
 
     /**

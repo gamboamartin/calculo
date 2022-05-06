@@ -24,6 +24,58 @@ class calculoTest extends test {
 
     }
 
+    public function test_obten_fecha_resta(){
+        errores::$error = false;
+        $calculo = new calculo();
+        $fecha = '';
+        $n_dias = -1;
+        $resultado = $calculo->obten_fecha_resta($fecha, $n_dias);
+        $this->assertIsArray( $resultado);
+        $this->assertStringContainsStringIgnoringCase('Error al validar fecha', $resultado['mensaje']);
+        $this->assertTrue(errores::$error);
+
+        errores::$error = false;
+        $fecha = '2021-01-01';
+        $n_dias = -1;
+        $resultado = $calculo->obten_fecha_resta($fecha, $n_dias);
+        $this->assertIsArray( $resultado);
+        $this->assertStringContainsStringIgnoringCase('Error $n_dias debe ser mayor o igual a 0', $resultado['mensaje']);
+        $this->assertTrue(errores::$error);
+
+        errores::$error = false;
+        $fecha = '2021-01-01';
+        $n_dias = 0;
+        $resultado = $calculo->obten_fecha_resta($fecha, $n_dias);
+        $this->assertIsString( $resultado);
+        $this->assertEquals('2021-01-01', $resultado);
+        $this->assertNotTrue(errores::$error);
+
+        errores::$error = false;
+        $fecha = '2021-01-01';
+        $n_dias = 0;
+        $resultado = $calculo->obten_fecha_resta($fecha, $n_dias,'fecha_hora_min_sec_esp');
+        $this->assertIsArray( $resultado);
+        $this->assertStringContainsStringIgnoringCase('Error al validar fecha', $resultado['mensaje']);
+        $this->assertTrue(errores::$error);
+
+        errores::$error = false;
+        $fecha = '2021-01-01 56:01:22';
+        $n_dias = 0;
+        $resultado = $calculo->obten_fecha_resta($fecha, $n_dias,'fecha_hora_min_sec_esp');
+        $this->assertIsArray( $resultado);
+        $this->assertStringContainsStringIgnoringCase('Error al validar fecha', $resultado['mensaje']);
+        $this->assertTrue(errores::$error);
+
+        errores::$error = false;
+        $fecha = '2021-01-01 23:01:22';
+        $n_dias = 1;
+        $resultado = $calculo->obten_fecha_resta($fecha, $n_dias,'fecha_hora_min_sec_esp');
+        $this->assertIsString( $resultado);
+        $this->assertEquals('2020-12-31 23:01:22', $resultado);
+        $this->assertNotTrue(errores::$error);
+        errores::$error = false;
+    }
+
     public function test_obten_mes_espaniol(){
         errores::$error = false;
         $calculo = new calculo();
