@@ -128,11 +128,16 @@ class calculo{
     }
 
     /**
-     * FULL
-     * @param int $n_dias
-     * @param string $fecha
+     * TODO
+     * Obtiene la fecha restando el numero de dias basado en la fecha del parametro
+     * @param int $n_dias Numero de dias a restar a la fecha
+     * @param string $fecha Fecha a la que se le estaran los dias
      * @param string $tipo_val
-     * @return string|array
+     *          utiliza los patterns de las siguientes formas
+     *          fecha=yyyy-mm-dd
+     *          fecha_hora_min_sec_esp = yyyy-mm-dd hh-mm-ss
+     *          fecha_hora_min_sec_t = yyyy-mm-ddThh-mm-ss
+     * @return string|array string con la fecha del resultado de la resta en dias array si error
      */
     public function obten_fecha_resta(string $fecha, int $n_dias, string $tipo_val = 'fecha'):string|array{
         $valida = $this->validaciones->valida_fecha(fecha: $fecha, tipo_val: $tipo_val);
